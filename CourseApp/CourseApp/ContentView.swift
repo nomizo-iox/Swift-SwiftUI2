@@ -10,20 +10,45 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                Text("UI Design")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color("accent"))
-                    .padding(.top)
-                Text("Certificate")
-                    .foregroundColor(.white)
+        ZStack {
+            // BLUE CARD
+            VStack {
+                Text("Card Back")
             }
-            Image("Background")
+            .frame(width: 300.0, height: 220.0)
+            .background(Color.blue)
+            .cornerRadius(10)
+            .shadow(radius: 20)
+            .offset(x: 0, y: -20)
+            
+            // BLACK MAIN CARD
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("UI Design")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("accent"))
+                            .padding(.top)
+                        Text("Certificate")
+                            .foregroundColor(.white)
+                    }
+                    // LOGO IMAGE
+                    Spacer()
+                    Image("Logo")
+                        .resizable()
+                        .frame(width: 30.0, height: 30.0)
+                }
+                    // BACKGROUND IMAGE
+                .padding(.horizontal)
+                Spacer()
+                Image("Background")
+            }
+            .frame(width: 340.0, height: 220.0)
+            .background(Color.black)
+            .cornerRadius(10)
+            .shadow(radius: 20)
         }
-        .background(Color.black)
-        .cornerRadius(10)
     }
 }
 
