@@ -16,30 +16,27 @@ struct ContentView: View {
             
             CardBottomView()
                 .blur(radius: 20)
-
+            
             // BLUE CARD
             CardView()
                 .offset(x: 0, y: -40)
                 .scaleEffect(0.85)
                 .rotationEffect(Angle(degrees: 15.0))
-                .rotation3DEffect(Angle(degrees: 50.0),
-                                  axis: (x: 10.0, y: 10.0, z: 10.0))
+                .rotation3DEffect(Angle(degrees: 50.0), axis: (x: 10.0, y: 10.0, z: 10.0))
                 .blendMode(.hardLight)
             
             CardView()
                 .offset(x: 0, y: -20)
                 .scaleEffect(0.9)
                 .rotationEffect(Angle(degrees: 10.0))
-                .rotation3DEffect(Angle(degrees: 40.0),
-                                  axis: (x: 10.0, y: 10.0, z: 10.0))
+                .rotation3DEffect(Angle(degrees: 40.0), axis: (x: 10.0, y: 10.0, z: 10.0))
                 .blendMode(.hardLight)
             
             // BLACK MAIN CARD
             CertificateView()
                 .scaleEffect(0.95)
                 .rotationEffect(Angle(degrees: 5.0))
-                .rotation3DEffect(Angle(degrees: 30.0),
-                                  axis: (x: 10.0, y: 10.0, z: 10.0))
+                .rotation3DEffect(Angle(degrees: 30.0), axis: (x: 10.0, y: 10.0, z: 10.0))
         }
     }
 }
@@ -58,17 +55,17 @@ struct CardView: View {
         VStack {
             Text("Card Back")
         }
-        .frame(width: 300.0, height: 220.0)
+        .frame(width: 340.0, height: 220.0)
         .background(Color.blue)
         .cornerRadius(10)
         .shadow(radius: 20)
-        .offset(x: 0, y: -20)
+//        .offset(x: 0, y: -20)
     }
 }
 
 struct CertificateView: View {
     var body: some View {
-        VStack {
+        return VStack {
             HStack {
                 VStack(alignment: .leading) {
                     Text("UI Design")
@@ -85,8 +82,8 @@ struct CertificateView: View {
                     .resizable()
                     .frame(width: 30.0, height: 30.0)
             }
-                // BACKGROUND IMAGE
-                .padding(.horizontal)
+            // BACKGROUND IMAGE
+            .padding(.horizontal)
             Spacer()
             Image("Background")
         }
@@ -119,7 +116,8 @@ struct CardBottomView: View {
                 .frame(width: 60, height: 6)
                 .cornerRadius(3.0)
                 .opacity(0.1)
-            Text("This certificate is proof that Samuel F. Ademola has achived the UI Design course with approval from a Design instructor.").lineLimit(10)
+            Text("This certificate is proof that Samuel F. Ademola has achived the UI Design course with approval from a Design instructor.")
+                .lineLimit(10)
             Spacer()
         }
         .frame(minWidth: 0, maxWidth: .infinity)
