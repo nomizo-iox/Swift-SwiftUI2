@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    // ANIMATION STATE
     @State var show = false
+    
+    // GESTURE STATE
+    @State var viewState = CGSize.zero
     
     var body: some View {
         ZStack {
@@ -31,6 +35,7 @@ struct ContentView: View {
                 //                .rotation3DEffect(Angle(degrees: 50.0), axis: (x: 10.0, y: 10.0, z: 10.0))
                 .blendMode(.hardLight)
                 .animation(.easeInOut(duration: 0.7))
+                .offset(x: viewState.width, y: viewState.height)
             
             CardView()
                 .background(show ? Color.red : Color("background8"))
@@ -42,17 +47,31 @@ struct ContentView: View {
                 //                .rotation3DEffect(Angle(degrees: 40.0), axis: (x: 10.0, y: 10.0, z: 10.0))
                 .blendMode(.hardLight)
                 .animation(.easeInOut(duration: 0.5))
+                .offset(x: viewState.width, y: viewState.height)
             
             // BLACK MAIN CARD
             CertificateView()
+                .offset(x: viewState.width, y: viewState.height)
                 .scaleEffect(0.95)
                 .rotationEffect(Angle(degrees: show ? 5 : 0))
                 //                .rotation3DEffect(Angle(degrees: show ? 30.0 : 0),
                 //                                  axis: (x: 10.0, y: 10.0, z: 10.0))
-                .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 10, initialVelocity: 100))
+                //                .animation(.interpolatingSpring(mass: 1, stiffness: 100, damping: 10, initialVelocity: 100))
+                .animation(.spring())
                 .onTapGesture {
                     self.show.toggle()
             }
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        self.viewState = value.translation
+                        self.show = false
+                }
+                .onEnded {  value in
+                    self.viewState = CGSize.zero
+                    self.show = false
+                }
+            )
         }
     }
 }
@@ -72,9 +91,9 @@ struct CardView: View {
             Text("Card Back")
         }
         .frame(width: 340.0, height: 220.0)
-//        .background(Color.blue)
-//        .cornerRadius(10)
-//        .shadow(radius: 20)
+        //        .background(Color.blue)
+        //        .cornerRadius(10)
+        //        .shadow(radius: 20)
         //        .offset(x: 0, y: -20)
     }
 }
